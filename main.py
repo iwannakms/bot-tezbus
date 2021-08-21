@@ -29,7 +29,7 @@ cursor = connection.cursor()
 
 
 TOKEN = "1794881977:AAFtVmJ2etRkwrRK1KxYzc_AOcIywuHodyU"
-APP_URL = f"https://bot-tezbus.herokuapp.com/"
+APP_URL = f"https://bot-tezbus.herokuapp.com/{TOKEN}"
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
@@ -70,19 +70,7 @@ def post_user_role(message):
         bot.send_message(message.chat.id, '❌ОШИБКА!❌ Введите заново.')
         return get_user_role(message) #ЗАНОВО ПЕРЕХОДИМ К ВВОДУ РОЛИ ПОЛЬЗОВАТЕЛЯ
 
-@server.route('/' + TOKEN, methods=['POST'])
-def get_message():
-    json_string = request.get_data().decode('utf-8')
-    update = telebot.types.Update.de_json(json_string)
-    bot.process_new_updates([update])
-    return '!', 200
 
-
-@server.route('/')
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url=APP_URL)
-    return '!', 200
 
 def reinput_user_role(message):
     if message.text.lower() == '↩️ввести заново роль':
@@ -441,9 +429,19 @@ def post_message(message):
         markup = types.ReplyKeyboardRemove(selective=False)
         bot.send_message(message.chat.id, 'Нажмите на /kettik для того, чтобы начать.', reply_markup=markup)
 
+@server.route('/' + TOKEN, methods=['POST'])
+def get_message():
+    json_string = request.get_data().decode('utf-8')
+    update = telebot.types.Update.de_json(json_string)
+    bot.process_new_updates([update])
+    return '!', 200
 
 
-bot.enable_save_next_step_handlers(delay=2)
-bot.load_next_step_handlers()
+@server.route('/')
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url=APP_URL)
+    return '!', 200
 
-bot.infinity_polling()
+if __name__ == '__main__':
+    server.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
