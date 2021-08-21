@@ -29,7 +29,7 @@ cursor = connection.cursor()
 
 
 TOKEN = "1794881977:AAFtVmJ2etRkwrRK1KxYzc_AOcIywuHodyU"
-APP_URL = f"https://tezbusbot.herokuapp.com/"
+APP_URL = f"https://bot-tezbus.herokuapp.com/"
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
