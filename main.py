@@ -14,12 +14,14 @@ from datetime import datetime, timedelta
 
 
 connection = psycopg2.connect(
-user="iwannakms",
-password="iwannakms",
-host="localhost",
+user="iezuianbxisqwf",
+password="dc8bfc62a1de4314a6075afc100430f4f165182ac45534be56d84da4b5b51fef",
+host="ec2-54-159-35-35.compute-1.amazonaws.com",
 port="5432",
-database="tezbus_db"
+database="diik30julquhu"
 )
+
+cursor = connection.cursor()
 
 cursor = connection.cursor()
 # mycursor = mydb.cursor()
