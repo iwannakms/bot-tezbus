@@ -381,7 +381,7 @@ def send_result(message):
     if user_data[message.chat.id]['type_of_transport'] =='поезд':
         if user_data[message.chat.id]['start_point'].lower() == 'бишкек' and user_data[message.chat.id]['end_point'].lower() == 'балыкчы' \
                 or user_data[message.chat.id]['end_point'].lower() == 'рыбачье' and user_data[message.chat.id]['start_point'].lower() == 'балыкчы' \
-                or user_data[message.chat.id]['start_point'].lower() == 'балыкчи' or user_data[message.chat.id]['start_point'].lower() == 'рыбачье' \
+                or user_data[message.chat.id]['start_point'].lower() == 'рыбачье' \
                 and user_data[message.chat.id]['end_point'].lower() == 'бишкек':
             bot.send_message(message.chat.id, """Поезд “Бишкек-Рыбачье”, “Рыбачье-Бишкек”.
 Время указано местное.
